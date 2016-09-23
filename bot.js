@@ -77,12 +77,12 @@ const actions = {
 
 				context.forecast = temperatur;
 				delete context.missingLocation;
+			});
     } else {
       context.missingLocation = true;
       delete context.forecast;
     }
 			cb(context);
-		});
   },  
 
  merge(sessionId, context, entities, message, cb) {

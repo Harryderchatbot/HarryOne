@@ -55,7 +55,7 @@ const actions = {
       cb();
     }
   },
-  	  // ermittel das wetter bot executes
+  
   ['getForecast'](sessionId, context, cb) {
 	  console.log("getforecast");
 		var location = context.location;
@@ -77,7 +77,6 @@ const actions = {
 
 				context.forecast = temperatur;
 				delete context.missingLocation;
-			}
     } else {
       context.missingLocation = true;
       delete context.forecast;

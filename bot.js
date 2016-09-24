@@ -94,6 +94,7 @@ const actions = {
     // Retrieve the location entity and store it into a context field
     const loc = firstEntityValue(entities, 'location');
     if (loc) {
+	    	 console.log("merge, Location",loc);
       context.location = loc; // store it in context
     }
 

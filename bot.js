@@ -20,69 +20,48 @@ const firstEntityValue = (entities, entity) => {
 
 // Bot actions
 const actions = {
-  say(sessionId, context, message, cb) {
-    console.log(message);
-
-    // Bot testing mode, run cb() and return
-    if (require.main === module) {
-      cb();
-      return;
-    }
-
+   send({sessionId}, {text}) {
     // Our bot has something to say!
-    // Let's retrieve the Facebook user whose session belongs to from context
-    // TODO: need to get Facebook user name
-    const recipientId = context._fbid_;
+    // Let's retrieve the Facebook user whose session belongs to
+    const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
-      FB.fbMessage(recipientId, message, (err, data) => {
-        if (err) {
-          console.log(
-            'Oops! An error occurred while forwarding the response to',
-            recipientId,
-            ':',
-            err
-          );
-        }
-
-        // Let's give the wheel back to our bot
-        cb();
+      // We return a promise to let our bot know when we're done sending
+      return fbMessage(recipientId, text)
+      .then(() => null)
+      .catch((err) => {
+        console.error(
+          'Oops! An error occurred while forwarding the response to',
+          recipientId,
+          ':',
+          err.stack || err
+        );
       });
     } else {
-      console.log('Oops! Couldn\'t find user in context:', context);
+      console.error('Oops! Couldn\'t find user for session:', sessionId);
       // Giving the wheel back to our bot
-      cb();
+      return Promise.resolve()
     }
   },
-  
-  ['getForecast'](context,entities,cb) {  
-	console.log("Medthode:getforecast");
-	var location = firstEntityValue(entities, 'location');
-	  console.log("Medthode:getforecast,location",location);
+  // You should implement your custom actions here
+  // See https://wit.ai/docs/quickstart
+
+   getForecast({context, entities}) {
+    return new Promise(function(resolve, reject) {
+      var location = firstEntityValue(entities, 'location')
       if (location) {
-        context.location = location;
+        context.forecast = 'sunny in ' + location; // we should call a weather API here
+        delete context.missingLocation;
+      } else {
+        context.missingLocation = true;	
+        delete context.forecast;
       }
-	cb(context);
-  },  
-
- merge(sessionId, context, entities, message, cb) {
-	 console.log("merge");
-    // Retrieve the location entity and store it into a context field
-    const loc = firstEntityValue(entities, 'location');
-    if (loc) {
-	    	 console.log("merge, Location",loc);
-      context.location = loc; // store it in context
-	    console.log("merge, Location",context.location);
-    }
-
-    cb(context);
+      return resolve(context);
+    });
   },
 
-
-  error(sessionId, context, error) {
-    console.log(error.message);
-  },
+ 
 
 };
 

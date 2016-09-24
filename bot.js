@@ -79,6 +79,7 @@ const actions = {
 				var temp_max = json.main.temp_max;
 
 				context.forecast = temperatur;
+				 console.log("temperatur",temperatur);
 				delete context.missingLocation;
 			});
     } else {

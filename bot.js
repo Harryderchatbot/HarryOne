@@ -57,9 +57,11 @@ const actions = {
   },
   
   ['getForecast'](sessionId, context, cb) {
-	  console.log("getforecast");
+	  console.log("Medthode:getforecast");
 		var location = context.location;
+	    console.log("location",location);
 	if (location) {
+		 console.log("location gesetzt");
 			var wetter_aktuell = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&APPID=bee2a155f8da9fb44104d360cc2feb8f&units=metric";
 			var wetter_vorhersage = "http://api.openweathermap.org/data/2.5/forecast?q="+location +"&APPID=bee2a155f8da9fb44104d360cc2feb8f&units=metric";
 			console.log("wetter_aktuell",wetter_aktuell);
@@ -79,6 +81,7 @@ const actions = {
 				delete context.missingLocation;
 			});
     } else {
+	     console.log("else zweig");
       context.missingLocation = true;
       delete context.forecast;
     }

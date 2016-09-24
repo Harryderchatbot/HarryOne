@@ -47,7 +47,7 @@ const actions = {
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
 
-   getForecast({context, entities}) {
+   getForecast(context, entities) {
     return new Promise(function(resolve, reject) {
       var location = firstEntityValue(entities, 'location')
       if (location) {

@@ -96,6 +96,7 @@ const actions = {
     if (loc) {
 	    	 console.log("merge, Location",loc);
       context.location = loc; // store it in context
+	    console.log("merge, Location",context.location);
     }
 
     cb(context);

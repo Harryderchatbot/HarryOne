@@ -61,9 +61,9 @@ const actions = {
 	var location = context.location;
 	   console.log("location",location);
 	  if (!location) {
-		   console.log("merge nicht ausgeführt, versuche location aus entity zu holen");
-		location = firstEntityValue(entities, "location");
-	  }
+		console.log("merge nicht ausgeführt, versuche location aus entity zu holen");
+		location = firstEntityValue(entities, "location")
+	}
 	     //var location = firstEntityValue(entities, "location");
 	    console.log("location",location);
 	if (location) {

@@ -60,7 +60,7 @@ const actions = {
 	  console.log("Medthode:getforecast");
 	var location = context.location;
 	   console.log("location",location);
-	  if (location) {
+	  if (!location) {
 		   console.log("merge nicht ausgeführt, versuche location aus entity zu holen");
 		location = firstEntityValue(entities, "location");
 	  }

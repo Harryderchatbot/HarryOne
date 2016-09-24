@@ -56,7 +56,7 @@ const actions = {
     }
   },
   
-  ['getForecast'](context,entities, cb) {  
+  ['getForecast'](context,entities) {  
 	  console.log("Medthode:getforecast");
 	var location = context.location;
 	   console.log("location",location);

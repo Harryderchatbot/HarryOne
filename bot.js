@@ -56,10 +56,10 @@ const actions = {
     }
   },
   
-  ['getForecast'](sessionId, context, entities,cb) {
+  ['getForecast'](context, entities,cb) {
 	  console.log("Medthode:getforecast");
-		//var location = context.location;
-	     var location = firstEntityValue(entities, "location");
+		var location = context.location;
+	     //var location = firstEntityValue(entities, "location");
 	    console.log("location",location);
 	if (location) {
 		 console.log("location gesetzt");

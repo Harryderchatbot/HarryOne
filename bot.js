@@ -57,42 +57,12 @@ const actions = {
   },
   
   ['getForecast'](context,entities) {  
-	  console.log("Medthode:getforecast");
-	var location = context.location;
-	   console.log("location",location);
-	  if (!location) {
-		console.log("merge nicht ausgeführt, versuche location aus entity zu holen");
-		location = firstEntityValue(entities, "location")
-	}
-	     //var location = firstEntityValue(entities, "location");
-	    console.log("location",location);
-	if (location) {
-		 console.log("location gesetzt");
-			var wetter_aktuell = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&APPID=bee2a155f8da9fb44104d360cc2feb8f&units=metric";
-			var wetter_vorhersage = "http://api.openweathermap.org/data/2.5/forecast?q="+location +"&APPID=bee2a155f8da9fb44104d360cc2feb8f&units=metric";
-			console.log("wetter_aktuell",wetter_aktuell);
-			fetch(wetter_aktuell).then(function(res) 
-			{ 
-				return res.json(); 
-			}).then(function(json) {
-				
-				//auslesen des ergebnisses
-				var temperatur = json.main.temp; 
-				var vorhersage = json.weather.main;
-				var vorhersage2 = json.weather.description;
-				var temp_min = json.main.temp_min;
-				var temp_max = json.main.temp_max;
-
-				context.forecast = temperatur;
-				 console.log("temperatur",temperatur);
-				delete context.missingLocation;
-			});
-    } else {
-	     console.log("else zweig");
-      context.missingLocation = true;
-      delete context.forecast;
-    }
-			cb(context);
+	console.log("Medthode:getforecast");
+	var location = firstEntityValue(entities, 'location');
+      if (location) {
+        context.location = location;
+      }
+	cb(context);
   },  
 
  merge(sessionId, context, entities, message, cb) {

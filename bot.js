@@ -21,8 +21,8 @@ const firstEntityValue = (entities, entity) => {
 // Bot actions
 const actions = {
   send(request, response) {
-    const {sessionId, context, entities} = request;
-    const {text, quickreplies} = response;
+    const request = {sessionId, context, entities};
+    const response = {text, quickreplies};
     return new Promise(function(resolve, reject) {
       console.log('sending...', JSON.stringify(response));
       return resolve();

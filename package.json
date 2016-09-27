@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "bot": "node bot.js",
     "test": "jest"
   },
   "author": "",
@@ -27,7 +26,7 @@
     "jest-cli": "^0.7.1",
     "node-fetch": "^1.6.0",
     "node-uuid": "^1.4.7",
-    "node-wit": "^4.1.0",
+    "node-wit": "^3.2.2",
     "request": "^2.72.0"
   },
   "repository": {
